@@ -7,10 +7,9 @@ from helper import *
 from login import *
 
 
-def get_details_from_link(session:requests.Session, company_link:str):
-    response = session.get(company_link)
+def get_details_from_link(session:requests.Session, company:dict):
+    response = session.get(company['link'])
     soup = BeautifulSoup(response.content, 'html.parser')
-    save_to_html(response.content)
 
     info = {}
 
@@ -64,18 +63,25 @@ def get_details_from_link(session:requests.Session, company_link:str):
     return info
 
 
-def get_all_company_details(session:requests.Session, company_list_json:str):
-    with open(company_list_json) as json_file:
-        company_links = json.load(json_file)
+def get_all_company_details(session:requests.Session, company_list_path:str, stop:int=None):
+    with open(company_list_path) as json_file:
+        company_list = json.load(json_file)
 
-    company_details = {}
-    for company_name, company_link in tqdm(company_links.items()):
-        company_details[company_name] = get_details_from_link(session, company_link)
+    company_details = company_list
+    for i, company_name in enumerate(tqdm(company_list.keys())):
+        print(company_name)
+        company_details[company_name].update(get_details_from_link(session, company_list[company_name]))
+        if stop is not None and i == stop:
+            break
     
     return company_details
 
 
 if __name__ == '__main__':
+    with open('./config.yaml', 'r') as file:
+        config = yaml.safe_load(file)
+    
     with requests.Session() as session:
-        login(session)
-        save_to_json(get_all_company_details(session, COMPANY_LINKS_JSON_FILENAME), COMPANY_DETAILS_JSON_FILENAME)
+        login(session, config['login_url'])
+        company_details = get_all_company_details(session, config['company_list_path'])
+        save_to_json(company_details, config['company_details_path'])

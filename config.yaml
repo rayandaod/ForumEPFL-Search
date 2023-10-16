@@ -1,0 +1,11 @@
+# GENERAL
+login_url: "https://platform.forumepfl.ch/login"
+companies_dir_url: "https://platform.forumepfl.ch/edition/5/student/6965/companies?page={}"
+num_pages: 36  # TODO: get number of pages automatically
+company_list_path: "./output/output1_list.json"
+company_details_path: "./output/output2_details.json"
+
+# YOUR CRITERIA
+company_type: ["company", "startup"]  # choices: "company", "startup", "NGO/IGO"
+your_skills: "Machine Learning, Data Science, Software Engineering"  # put here your skills
+filter_level: 2  # 1: list all the companies that might need someone with your profile; 2: list only the companies that explicitely need you

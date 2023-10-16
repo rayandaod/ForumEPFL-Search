@@ -17,22 +17,26 @@ cd blabla
 
 ```pip install -r requirements.txt```
 
-3. If you want to run the scripts again, they will need credentials to access the company lists and infos. You should therefore save your Forum EPFL credentials as environment variables under the names `FORUM_EMAIL` and `FORUM_PASSWORD`. Note: this is not the most secure way of storing these information, but it's definitely better than hardcoding them lol.
+1. If you want to run the scripts from scratch, they will need credentials to access the company lists and infos. You should therefore save your Forum EPFL credentials as environment variables:
 
 ````
 export FORUM_EMAIL=[your_email]
 export FORUM_PASSWORDL=[your_password]
 ``````
+
+Note: this is not the most secure way of storing these information, but it's definitely better than hardcoding them lol.
+
+Otherwise you can use the results located in the `output/` folder.
    
-4. If you chose to follow step 3 above, you should run 
+4. If you chose to follow step 3 above, you should test the login process by running:
    
    ```python login.py```
    
-   It should print `<Response [200]>`
+   This should print `<Response [200]>`
 
 ## Usage
 
-You can either run the scripts again, or use the existing ones. If you choose the latter, please skip to Step x.
+You can either run the scripts again, or use the existing ones. If you choose the latter, please skip to Step 3.
 
 ### Step 1 - Retrieve first-level informations
 ```python get_list.py```
