@@ -1,3 +1,12 @@
+# Unwanted files
 __pycache__/
-/models/
 .DS_Store
+
+# Large data files
+/models/
+
+# HTML files
+/**/*.html
+
+# Jupyter Notebook
+draft.ipynb
